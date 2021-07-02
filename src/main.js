@@ -1,30 +1,41 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+
 import * as path from "core-js";
+import StartHello from "@/components/StartHello";
 
-const express = require('express');
-const publicPath = path.join(__dirname)
+function js () {
+    createApp(App).mount('#app');
+}
 
+export default {
+    name: "JS",
+    props: js
+}
+/*const server = require('express')();
+const template = require('fs').readFileSync('.index.template.html', 'utf-8f');
+const renderer = require('vue-server-renderer').createRenderer({
+    template,
+});
+const context = {
+    title:'vue ssr',
+    meta:'' +
+        '<meta name="keyword" content="vue,ssr">'+
+        '<meta name="description" content="vue ssr demo">'+
+    '',
+};
 
-const pp = express()
-pp.use(express.static(publicPath))
+server.get('*', (req,res) => {
+    createApp(App).mount('#app');
 
-pp.listen(3000, () => {
-    console.log('Server has been started ...')
- })
-
-createApp(App).mount('#app')
-
-const renderer = require('vue-server-renderer').createRenderer()
-
-renderer.renderToString(App, (err, html) => {
-    if (err) throw err
-    console.log(html)
-    })
-
-renderer.renderToString(App).then(html => {
-    console.log(html)
-}).catch(err => {
-    console.error(err)
+    renderer.renderToString(App, context, (err, html) => {
+            console.log(html);
+            if (err) {
+                res.status(500).end('Internal Server Error')
+                return;
+            }
+            res.end(html);
+        });
 })
+server.listen(8080);*/
 
