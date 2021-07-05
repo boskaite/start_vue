@@ -1,10 +1,8 @@
-//import JS from '/C:/xampp/htdocs/amicum/start_vue/src/main.js'
 import http from 'http'
-//const http = require('http');
 import path from 'path'
 import fs from 'fs'
 
-var __dirname = path.resolve();
+let __dirname = path.resolve();
 
 http.createServer((req, res) => {
     switch (req.url)
