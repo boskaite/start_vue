@@ -1,50 +1,28 @@
-import JS from 'C:/xampp/up'
+//import JS from '/C:/xampp/htdocs/amicum/start_vue/src/main.js'
+import http from 'http'
+//const http = require('http');
+import path from 'path'
+import fs from 'fs'
 
-const http = require('http');
-
-const html = '<!doctype>\n' +
-    '  <head>\n' +
-    '    <meta charset="utf-8">\n' +
-    '    <link rel="stylesheet" href="style.css">\n' +
-    '    <title><%= htmlWebpackPlugin.options.title %></title>\n' +
-    '  </head>\n' +
-    '  <body>\n' +
-    '    <h1>Hello! It is the first page</h1>\n' +
-    '      <button>Enter on me</button>\n' +
-    '    <script src="main.js"></script>\n' +
-    '  </body>\n' +
-    '</html>\n';
-const css = '' +
-    'body {\n' +
-        'margin: 0;\n' +
-        'padding: 0;\n' +
-        'text-align: center;\n' +
-    '}\n' +
-    'h1 {\n' +
-        'background-color: #42b983;\n' +
-        'color: white;\n' +
-        'padding: 5.em;\n' +
-        'font-family: Consoles\n' +
-    '}\n';
-//const js = require('C:/xampp/htdocs/amicum/start_vue/src/main');
-/*"const button = document.querySelector('button');\n" +
-    "button.addEventListener('click', event => alert('Node.js in run'));\n" ;*/
-
+var __dirname = path.resolve();
 
 http.createServer((req, res) => {
     switch (req.url)
     {
         case '/':
          res.writeHead(200, { 'Content-Type': 'text/html'});
-            res.end(html);
+            const html = fs.createReadStream(__dirname+'/index.html');
+            html.pipe(res); //res.end(html);
             break;
         case '/style.css':
          res.writeHead(200, { 'Content-Type': 'text/css'});
-            res.end(css);
+            const css = fs.createReadStream(__dirname + '/style.css');
+            css.pipe(res); //res.end(css);
             break;
         case '/main.js':
           res.writeHead(200, { 'Content-Type': 'text/javascript'});
-            res.end(JS);
+            const js = fs.createReadStream(__dirname + '/hello_button.js');
+            js.pipe(res); //res.end(js);
             break;
         default:
             res.writeHead(404, { 'Content-Type': 'text/plain'});

@@ -4,14 +4,22 @@ import App from './App.vue'
 import * as path from "core-js";
 import StartHello from "@/components/StartHello";
 
-function js () {
+function fjs () {
     createApp(App).mount('#app');
 }
-
 export default {
-    name: "JS",
-    props: js
+    name: 'JS',
+    components: {
+        function: fjs()
+    }
 }
+
+/*export default {
+    name: 'JS',
+    components: {
+        js
+    }
+};*/
 /*const server = require('express')();
 const template = require('fs').readFileSync('.index.template.html', 'utf-8f');
 const renderer = require('vue-server-renderer').createRenderer({
